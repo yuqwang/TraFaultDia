@@ -1,0 +1,38 @@
+From DeepTraLog (https://fudanselab.github.io/research/MSFaultEmpiricalStudy/)
+F01.Asynchronous message delivery lacks sequence control
+F02.Different data requests for the same report are returned in an unexpected order
+F03.JVM configurations are inconsistent with Docker configurations
+F04. SSL offloading happens in a fine granularity (happening in almost each Docker instance)
+F05.The high load of a type of requests causes the timeout failure of another type of requests
+F06.Endless recursive requests of a microservice are caused by SQL errors of another dependent microservice
+F07.The overload of requests to a third-party service leads to denial of service
+F08.The key in the request of one microservice is not passed to its dependent microservice
+F09.There is a CSS display style error in bi-directional
+F10.An API used in a special case of BOM updating returns unexpected output
+F11.The BOM data is updated in an unexpected sequence
+F12.Price status querying does not consider an unexpected output of a microservice in its call chain
+F13. Price optimization steps are executed in an unexpected order
+F14. There is a mistake in including the locked product in CPI calculation
+
+
+from Nezha
+present in this format: “{id}: {pod name}, {fault category}”
+F15 ts-contacts-service return 08_43 08_44 08_45 08_52 08_53 08_54 08_58 08_59 09_00
+F16 ts-basic-service return 09_04 09_05 09_12 09_13 09_14 09_21 09_22 09_23
+F17 ts-basic-service exception 09_25 09_26 09_27
+F18 (#28 traces) ts-food-service return 09_30 09_31 09_32 09_34 09_35 09_36
+F19 ts-verification-code-service return 09_42 09_43 09_44 09_49 09_50 09_51 09_58 09_59 10_00
+F20 ts-travel-service exception 10_04 10_05 10_06 10_12 10_13 10_14 10_20 10_21 10_22
+F21 ts-route-service exception  10_56 10_57 10_58 11_04 11_05 11_06 11_13 11_14 11_15 >200 traces
+F22 ts-price-service exception 11_19 11_20 11_21 11_29_ 11_30 11_31 11_36  11_37  11_38
+F23 ts-travel-service cpu_contention 13_06 13_07 13_08
+F24 (#28 traces) ts-verification-code-service network_delay 12_29 12_30 12_31 12_36 12_37 12_38
+F25 (#26 traces)ts-contacts-service cpu_contention 13_31 13_32 13_33
+F26 (#30 traces) ts-food-service cpu_contention 14_49, 14_50, 14_51 12_44 12_45 12_46
+F27 ts-security-service network_delay 14_00 14_01 14_02 14_08 14_09 14_10
+F28 ts-basic-service network_delay, 12_07 12_08 12_15 12_16
+F29 ts-travel-service network_delay 13_15 13_16 13_17 13_22 13_23 13_24
+F30 ts-route-service network_delay  13_45 13_46 13_52 13_53 13_54
+
+Novel fault categories: [F02, F10, F03, F11, F04, F08, F06, F20, F19, F17]
+Base fault categories: the rest in addition to "Novel fault categories"

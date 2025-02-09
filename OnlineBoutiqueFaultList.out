@@ -1,0 +1,36 @@
+present in this format: “{id}: {pod name}, {fault category}”
+B1 cartservice, network_delay
+B2 checkoutservice, return
+B3 productcatalogservice, exception
+B4 shippingservice, cpu_contention
+B5 adservice, exception
+B6 frontend, return
+B7 emailservice, network_delay
+B8 recommendationservice,  cpu_consumed
+B9 paymentservice, cpu_contention
+B10 currencyservice, network_delay
+B11 frontend, cpu_contention
+B12 frontend, cpu_consumed
+B13 frontend, exception
+B14 cartservice, cpu_contention
+B15 checkoutservice, network_delay
+B16 checkoutservice, exception
+B17 checkoutservice, cpu_consumed
+B18 currencyservice, cpu_contention
+B19 emailservice, cpu_contention
+B20 emailservice, cpu_consumed
+B21 paymentservice, network_delay
+B22 productcatalogservice, network_delay
+B23 productcatalogservice, return
+B24 productcatalogservice, cpu_consumed
+B25 recommendationservice, network_delay
+B26 recommendationservice, cpu_contention
+B27 shippingservice, F27 network_delay
+B28 shippingservice, F28 cpu_consumed
+B29 adservice, network_delay
+B30 adservice, return
+B31 adservice, cpu_contention
+B32 adservice, cpu_consumed
+
+Novel fault categories: [B30, B07, B17, B09, B27, B11, B02, B29, B03, B16]
+Base fault categories: the rest in addition to "Novel fault categories"

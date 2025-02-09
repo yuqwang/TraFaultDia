@@ -1,0 +1,108 @@
+OnlineBoutique_AttenAE_train:
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument('--span_input_dim', type=int, help='span_input_dim', default=771)
+    argparser.add_argument('--log_input_dim', type=int, help='log_input_dim', default=768)
+    argparser.add_argument('--embed_dim', type=int, help='embed_dim', default=768)
+    argparser.add_argument('--num_heads', type=int, help='num_heads', default=8)
+    argparser.add_argument('--dropout_rate', type=int, help='dropout_rate', default=0.1-0.4)
+    argparser.add_argument('--batch_size', type=int, help='batch_size', default=64)
+    argparser.add_argument('--train_ntrace', type=int, help='train_ntrace', default=3072)
+    argparser.add_argument('--test_ntrace', type=int, help='test_ntrace', default=512)
+    argparser.add_argument('--lr', type=int, help='lr', default= initialize from 0.0008)
+
+Trainticket_AttenAE_train:
+argparser = argparse.ArgumentParser()
+    argparser.add_argument('--embed_dim', type=int, help='embed_dim', default=768)
+    argparser.add_argument('--span_input_dim', type=int, help='span_input_dim', default=771)
+    argparser.add_argument('--log_input_dim', type=int, help='log_input_dim', default=768)
+    argparser.add_argument('--span_max_length', type=int, help='span_max_length', default=91)
+    argparser.add_argument('--log_max_length', type=int, help='log_max_length', default=194)
+    argparser.add_argument('--num_heads', type=int, help='num_heads', default=8)
+    argparser.add_argument('--dropout_rate', type=int, help='dropout_rate', default=0.1-0.4)
+    argparser.add_argument('--batch_size', type=int, help='batch_size', default=32)
+    argparser.add_argument('--lr', type=int, help='lr', default=initialize from 0.00003)
+    args = argparser.parse_args()
+
+OnlineBoutique->OnlineBoutique TEMAML:
+    config = {
+        "n_way": 5,
+        "k_spt": 5 OR 10,
+        "k_qry": 15,
+        "task_num": 4,
+        "update_lr": initialize from 0.005,
+        "meta_lr": initialize from 0.0001,
+        "dropout": 0.1-0.3,
+        "input_dim": 768,
+        "nhead": 6,
+        "num_encoder_layers": 2,
+        "update_step": 5,
+        "update_step_test": 15,
+
+        "cache_size": 5,
+        "perm_size": 50
+    }
+
+OnlineBoutique->Trainticket TEMAML:
+
+{
+  "cache_size": 5,
+  "dropout": 0.1-0.3,
+  "epoch": 100,
+  "input_dim": 768,
+  "k_qry": 15,
+  "k_spt": 5 OR 10,
+  "meta_lr": initialize from 0.0001,
+  "n_way": 5,
+  "nhead": 6,
+  "num_encoder_layers": 2,
+  "perm_size": 50,
+  "task_num": 4,
+  "update_lr": initialize from 0.03,
+  "update_step": 5,
+  "update_step_test": 15
+}
+
+
+Trainticket->OnlineBoutique TEMAML:
+config = {
+        "n_way": 5,
+        "k_spt": 5 OR 10,
+        "k_qry": 15,
+        "task_num": 4,
+        "update_lr": initialize from 0.005,
+        "meta_lr": initialize from 0.00001,
+        "dropout": 0.1-0.3,
+        "input_dim": 768,
+        "nhead": 6,
+        "num_encoder_layers": 2,
+        "update_step": 5,
+        "update_step_test": 20,
+
+        "cache_size": 5,
+        "perm_size": 50
+
+    }
+
+Trainticket->Trainticket TEMAML:
+config = {
+        "epoch": 500,
+        "n_way": 5,
+        "k_spt": 10,
+        "k_qry": 15,
+        "task_num": 3,
+
+        "update_lr": initialize from 0.01,
+        "meta_lr": initialize from 0.00009,
+        "dropout": 0.1-0.3,
+
+        "input_dim": 768,
+        "nhead": 6,
+        "num_encoder_layers": 2,
+        "update_step": 5,
+        "update_step_test": 15,
+        # ... add other parameters as needed
+
+        "cache_size": 5,
+        "perm_size": 50
+    }
+
