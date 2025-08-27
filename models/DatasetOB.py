@@ -60,13 +60,13 @@ class DatasetOB(Dataset):
         # self.cache_size = cache_size
 
         # OnlineBoutique base categories
-        self.train_cls = [1, 4, 5, 6, 8, 10, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 31, 32]
+        self.train_cls = [your training classes]
 
         config = {
-            "dropout_rate": 0.2846091710354427,
+            "dropout_rate": your drop rate value,
             "embed_dim": 768,
-            "num_heads": 8,
-            "span_input_dim": self.test_span_input_dim ,
+            "num_heads": number of heads,
+            "span_input_dim": self.test_span_input_dim,
             "log_input_dim": self.test_log_input_dim
         }
 
@@ -153,13 +153,13 @@ class DatasetOB(Dataset):
                 x_qry_spans_qrys_tensor = torch.zeros(self.querysz, self.test_log_max_length, self.test_span_input_dim)
                 x_qry_logs_qrys_tensor = torch.zeros(self.querysz, self.test_log_max_length, self.test_log_input_dim)
 
-                # 支持集处理
+
                 for index, trace_id in enumerate(x_spt_traces):
                     x_spt_spans_sets_tensor, x_spt_logs_sets_tensor = self.process_trace(
                         index, trace_id, spans_sample_df, logs_sample_df, train_spans_emb, train_logs_emb,
                         x_spt_spans_sets_tensor, x_spt_logs_sets_tensor)
 
-                # 查询集处理
+
                 for index, trace_id in enumerate(x_qry_traces):
                     x_qry_spans_sets_tensor, x_qry_logs_sets_tensor = self.process_trace(
                         index, trace_id, spans_sample_df, logs_sample_df, train_spans_emb, train_logs_emb,
@@ -258,13 +258,13 @@ class DatasetOB(Dataset):
                 x_qry_spans_qrys_tensor = torch.zeros(self.querysz, self.test_log_max_length, self.test_span_input_dim)
                 x_qry_logs_qrys_tensor = torch.zeros(self.querysz, self.test_log_max_length, self.test_log_input_dim)
 
-                # 支持集处理
+
                 for index, trace_id in enumerate(x_spt_traces):
                     x_spt_spans_sets_tensor, x_spt_logs_sets_tensor = self.process_trace(
                         index, trace_id, spans_sample_df, logs_sample_df, train_spans_emb, train_logs_emb,
                         x_spt_spans_sets_tensor, x_spt_logs_sets_tensor)
 
-                # 查询集处理
+
                 for index, trace_id in enumerate(x_qry_traces):
                     x_qry_spans_sets_tensor, x_qry_logs_sets_tensor = self.process_trace(
                         index, trace_id, spans_sample_df, logs_sample_df, train_spans_emb, train_logs_emb,
