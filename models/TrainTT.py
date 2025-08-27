@@ -24,7 +24,7 @@ def set_seed(seed):
     set_seed(seed)
 
 def train_t4maml5w5s(config):
-    set_seed(42)
+    set_seed(seed)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -38,7 +38,7 @@ def train_t4maml5w5s(config):
         ('transformer_encoder', [config['input_dim'], config['nhead'], config['num_encoder_layers'], 2048, config['n_way'], config['dropout']])
     ]
 
-    test_cls = [2, 10, 3, 11, 4, 8, 6, 20, 19, 17]
+    test_cls = [your classes]
 
     maml = MAML(config, learner_config).to(device)
 
@@ -60,7 +60,7 @@ def train_t4maml5w5s(config):
             perm_accs = [0 for _ in range(perm_size)]
             for i in range(perm_size):
                 print("perm_num:", i)
-                # 直接随机选择5个数字并生成一个排列
+                
                 selected_numbers = random.sample(test_cls, config['n_way'])
                 random_permutation = tuple(selected_numbers)
 
@@ -89,7 +89,6 @@ def train_t4maml5w5s(config):
             test_highest_perm_accs = np.max(perm_accs)
             test_ave_perm_accs = np.mean(perm_accs)
 
-        # 报告所有的准确率
         metrics_to_report = {f'accuracy_step_{i}': acc for i, acc in enumerate(train_accs)}
         metrics_to_report.update({'test_highest_accs': test_highest_perm_accs, 'test_ave_accs': test_ave_perm_accs})
 
@@ -118,8 +117,8 @@ if __name__ == '__main__':
         "dropout": tune.uniform(0.1, 0.46),
 
         "input_dim": 768,
-        "nhead": tune.choice([1, 2]),  # 从[5, 25]中选择
-        "num_encoder_layers": 2,  # 从[2, 4, 6]中选择
+        "nhead": tune.choice([1, 2]),  
+        "num_encoder_layers": 2,  
         "update_step": 5,
         "update_step_test": 15,
         # ... add other parameters as needed
@@ -128,7 +127,6 @@ if __name__ == '__main__':
         "perm_size": 50
     }
 
-    # 创建一个scheduler来进行早停
     scheduler = ASHAScheduler(
         metric="test_ave_accs",
         mode="max",
@@ -151,7 +149,7 @@ if __name__ == '__main__':
         scheduler=scheduler,
         progress_reporter=reporter,
         local_dir='./ray_tune/meta',
-        keep_checkpoints_num=2,  # Keep only the best checkpoint.
+        keep_checkpoints_num=2,  
         checkpoint_score_attr="test_ave_accs"
     )
 
