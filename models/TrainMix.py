@@ -27,7 +27,7 @@ def set_seed(seed):
     set_seed(seed)
 
 def train_maml(config):
-    set_seed(42)
+    set_seed(your seed)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -47,7 +47,7 @@ def train_maml(config):
     maml = MAML(config, learner_config).to(device)
 
     # Trainticket novel categories
-    test_cls= [2, 10, 3, 11, 4, 8, 6, 20, 19, 17]
+    test_cls= [your classes]
 
 
     perm_size = config['perm_size']
@@ -72,7 +72,7 @@ def train_maml(config):
                 print("perm_num:", i)
 
                 selected_numbers = random.sample(test_cls, config['n_way'])
-                random_permutation = tuple(selected_numbers)  # 不需要所有排列，只选择当前的排列
+                random_permutation = tuple(selected_numbers) 
 
                 print("selected test cls is>", random_permutation, flush=True)
                 test_x_spt_tensor, test_x_qry_tensor, test_y_spt_tensor, test_y_qry_tensor = db.load_data_cache_tt_test('test', random_permutation, cache_size)
@@ -102,7 +102,6 @@ def train_maml(config):
             test_highest_perm_accs = np.max(perm_accs)
             test_ave_perm_accs = np.mean(perm_accs)
 
-        # 报告所有的准确率
         metrics_to_report = {f'accuracy_step_{i}': acc for i, acc in enumerate(train_accs)}
         metrics_to_report.update({'test_highest_accs': test_highest_perm_accs, 'test_ave_accs': test_ave_perm_accs})
 
@@ -110,7 +109,6 @@ def train_maml(config):
 
 
 if __name__ == '__main__':
-    #set_seed(42)
 
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
@@ -142,11 +140,8 @@ if __name__ == '__main__':
 
         "cache_size": 5,
         "perm_size": 50
-        # ... add other parameters as needed
-        # "nhead": tune.choice([2, 4, 6, 8, 12]),
     }
 
-    # 创建一个scheduler来进行早停
     scheduler = ASHAScheduler(
         metric="test_ave_accs",
         mode="max",
