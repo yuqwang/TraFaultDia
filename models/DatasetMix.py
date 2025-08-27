@@ -54,14 +54,14 @@ class DatasetMix(Dataset):
 
         self.pretrain_dim = 768
         #OnlineBoutique base categories
-        self.train_cls = [1, 4, 5, 6, 10, 12, 13, 14, 15, 18, 19 , 20, 21, 22, 23, 24, 25, 26, 28, 31, 32]
+        self.train_cls = [your training classes]
 
         # AttenAE's optimized encoder for Trainticket
 
         TT_config = {
-            "dropout_rate": 0.14857704629135002,
+            "dropout_rate": your dropout_rate,
             "embed_dim": 768,
-            "num_heads": 8,
+            "num_heads": your num_heads,
             "span_input_dim": self.TTspan_input_dim,
             "log_input_dim": self.TTlog_input_dim
         }
