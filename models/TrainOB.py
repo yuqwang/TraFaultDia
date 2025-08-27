@@ -27,7 +27,7 @@ def set_seed(seed):
     set_seed(seed)
 
 def train_maml(config):
-    set_seed(42)
+    set_seed(your seed)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -47,9 +47,7 @@ def train_maml(config):
     maml = MAML(config, learner_config).to(device)
 
     # OnlineBoutique novel categories
-    test_cls= [30, 7, 17, 9, 27, 11, 2, 29, 3, 16]
-
-    # 创建一个空的 numpy 数组来存储排列
+    test_cls= [your classes]
 
     perm_size = config['perm_size']
     cache_size = config['cache_size']
@@ -103,7 +101,6 @@ def train_maml(config):
             test_highest_perm_accs = np.max(perm_accs)
             test_ave_perm_accs = np.mean(perm_accs)
 
-        # 报告所有的准确率
         metrics_to_report = {f'accuracy_step_{i}': acc for i, acc in enumerate(train_accs)}
         metrics_to_report.update({'test_highest_accs': test_highest_perm_accs, 'test_ave_accs': test_ave_perm_accs})
 
@@ -111,7 +108,6 @@ def train_maml(config):
 
 
 if __name__ == '__main__':
-    #set_seed(42)
 
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
@@ -128,7 +124,7 @@ if __name__ == '__main__':
         "dropout": tune.uniform(0.1, 0.46),
         "input_dim": 768,
         "nhead": tune.choice([2, 4, 6]),
-        "num_encoder_layers": 2,  # 从[2, 4]中选择
+        "num_encoder_layers": 2,  
         "update_step": 5,
         "update_step_test": 16,
 
@@ -148,7 +144,6 @@ if __name__ == '__main__':
         # "nhead": tune.choice([2, 4, 6, 8, 12]),
     }
 
-    # 创建一个scheduler来进行早停
     scheduler = ASHAScheduler(
         metric="test_ave_accs",
         mode="max",
