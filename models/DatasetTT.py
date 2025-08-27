@@ -45,7 +45,7 @@ class DatasetTT(Dataset):
         self.pretrain_dim = 768
         # self.cache_size = cache_size
 
-        self.train_cls = [1, 5, 7, 9, 12, 13, 14, 15, 16, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+        self.train_cls = [your training classes]
 
         config = {
             "dropout_rate": 0.14857704629135002,
@@ -63,9 +63,9 @@ class DatasetTT(Dataset):
 
         self.Fusion_model = AttenAEFusionModel(config)
         Fusion_model_state_dict = torch.load(fusion_model_state_dict_path)
-        # 从每个键中移除'module.'前缀
+
         new_state_dict = {k.replace('module.', ''): v for k, v in Fusion_model_state_dict.items()}
-        # 加载调整后的状态字典到模型
+
         self.Fusion_model.load_state_dict(new_state_dict)
 
 
